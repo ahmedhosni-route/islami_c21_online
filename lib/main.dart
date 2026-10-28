@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islamic_c21_online/modules/splash/screens/splash_screen.dart';
 
 void main() {
+  // Ahmed Hosni
   runApp(const MyApp());
 }
 
