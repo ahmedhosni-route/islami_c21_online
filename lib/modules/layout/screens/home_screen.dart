@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_c21_online/core/app_data/app_data.dart';
 import 'package:islamic_c21_online/core/theme/app_colors.dart';
+import 'package:islamic_c21_online/modules/quran_details/screens/quran_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -64,62 +65,81 @@ class HomeScreen extends StatelessWidget {
                   },
                   itemCount: AppData.nameAr.length,
                   itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/images/img_sur_number_frame.png",
-                              width: 52,
-                            ),
-                            Text(
-                              (index + 1).toString(),
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return QuranDetailsScreen(
+                                sura: SuraModel(
+                                  id: (index + 1).toString(),
+                                  verses: AppData.verses[index],
+                                  suraNameAr: AppData.nameAr[index],
+                                  suraNameEn: AppData.nameEn[index],
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/img_sur_number_frame.png",
+                                width: 52,
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          spacing: 8,
-                          children: [
-                            Text(
-                              AppData.nameEn[index],
+                              Text(
+                                (index + 1).toString(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 8,
+                            children: [
+                              Text(
+                                AppData.nameEn[index],
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+
+                              Text(
+                                AppData.verses[index] + " Verces",
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Expanded(
+                            child: Text(
+                              AppData.nameAr[index],
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
                               ),
+                              textDirection: TextDirection.rtl,
                             ),
-
-                            Text(
-                              AppData.verses[index] + " Verces",
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            AppData.nameAr[index],
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textDirection: TextDirection.rtl,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                   },
                 ),
