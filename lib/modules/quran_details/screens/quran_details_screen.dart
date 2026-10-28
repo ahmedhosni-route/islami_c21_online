@@ -20,6 +20,8 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
       readFile(widget.sura.id);
     }
     return Scaffold(
+
+      
       backgroundColor: AppColors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
