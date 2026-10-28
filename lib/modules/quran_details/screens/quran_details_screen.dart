@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islamic_c21_online/core/theme/app_colors.dart';
@@ -26,56 +27,91 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
         foregroundColor: AppColors.gold,
         title: Text(widget.sura.suraNameEn),
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(child: Image.asset("assets/images/img_left_corner.png")),
-              Expanded(
-                flex: 2,
-                child: Center(
-                  child: Text(
-                    widget.sura.suraNameAr,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.gold,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Image.asset("assets/images/img_left_corner.png")),
+                Expanded(
+                  flex: 2,
+                  child: Center(
+                    child: Text(
+                      widget.sura.suraNameAr,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.gold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Image.asset("assets/images/img_right_corner.png"),
-              ),
-            ],
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: suraList.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.all(4),
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: AppColors.gold),
-                  ),
-                  child: Center(
-                    child: Text(
-                      suraList[index] + "[${index + 1}]",
+                Expanded(
+                  child: Image.asset("assets/images/img_right_corner.png"),
+                ),
+              ],
+            ),
+
+
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text.rich(TextSpan(
+                    children: suraList.map((e) {
+                      int index = suraList.indexOf(e);
+                      return TextSpan(
+                        text: "$e[${index + 1}] ",
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            showModalBottomSheet(
+                              context: context, builder: (context) {
+                              return Center(child: Text(e),);
+                            },);
+                          },
                       style: TextStyle(
                         fontSize: 18,
                         color: AppColors.gold,
                         fontWeight: FontWeight.w600,
+                          height: 2.2
                       ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
+                      );
+                    },).toList()
+                ),
+                  textDirection: TextDirection.rtl,
+                ),
+              ),
+            )
+
+
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: suraList.length,
+            //     itemBuilder: (context, index) {
+            //       return Container(
+            //         margin: EdgeInsets.all(4),
+            //         padding: EdgeInsets.all(8),
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(15),
+            //           border: Border.all(color: AppColors.gold),
+            //         ),
+            //         child: Center(
+            //           child: Text(
+            //             suraList[index] + "[${index + 1}]",
+            //             style: TextStyle(
+            //               fontSize: 18,
+            //               color: AppColors.gold,
+            //               fontWeight: FontWeight.w600,
+            //             ),
+            //             textDirection: TextDirection.rtl,
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
