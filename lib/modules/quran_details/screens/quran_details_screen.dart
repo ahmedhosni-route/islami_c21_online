@@ -36,6 +36,10 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
             Row(
               children: [
                 Expanded(
+
+
+
+                  
                     child: Image.asset("assets/images/img_left_corner.png")),
                 Expanded(
                   flex: 2,
