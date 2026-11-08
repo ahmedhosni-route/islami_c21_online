@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_c21_online/core/theme/app_colors.dart';
-import 'package:islamic_c21_online/modules/layout/screens/layout_screen.dart';
+import 'package:islamic_c21_online/modules/onboarding/screens/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,11 +13,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 4), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return LayoutScreen();
+            return OnboardingScreen();
           },
         ),
       );
